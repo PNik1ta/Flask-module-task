@@ -4,6 +4,10 @@ import os
 
 #repositories
 from app.repositories.advice_repository import AdviceRepository
+from app.repositories.challenge_repository import ChallengeRepository
+from app.repositories.icebracker_repository import IcebreakerRepository
+from app.repositories.theme_repository import ThemeRepisitory
+from app.repositories.user_repository import UserRepository
 
 #services
 from app.services.advice_service import AdviceService
@@ -20,6 +24,10 @@ def create_app():
 
 	#repositories
 	adviceRepository = AdviceRepository(app)
+	challengeRepository = ChallengeRepository(app)
+	icebreakerRepository = IcebreakerRepository(app)
+	themeRepository = ThemeRepisitory(app)
+	userRepository = UserRepository(app)
 
 	#services
 	adviceService = AdviceService(adviceRepository)
