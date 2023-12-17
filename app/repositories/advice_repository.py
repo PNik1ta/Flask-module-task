@@ -1,8 +1,11 @@
-from classes import Advice
+from app.classes.advice import Advice
 from flask import current_app
 from bson.objectid import ObjectId
 
 class AdviceRepository:
+	def __init__(self, app):
+		self.app = app
+		
 	def createAdvice(self, advice: Advice):
 		return current_app.mongo.db.advice.insert_one(advice.__dict__)
 	

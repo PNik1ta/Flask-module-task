@@ -3,14 +3,18 @@ from flask_pymongo import PyMongo
 import os
 
 #repositories
-from repositories import AdviceRepository
+from app.repositories.advice_repository import AdviceRepository
 
 #services
-from services import AdviceService
+from app.services.advice_service import AdviceService
+from flasgger import Swagger
 
 def create_app():
 	app = Flask(__name__)
-	app.config['MONGO_URI'] = 'mongodb://' + os.environ.get('MONGO_HOST') + ':' + os.environ.get('MONGO_PORT') + '/' + os.environ.get('MONGO_DB')
+	Swagger(app, template_file='swagger/swagger.yml')
+	print(os.environ.get('MONGO_HOST'))
+	app.config['MONGO_URI'] = f'mongodb://{os.environ.get("MONGO_HOST")}:{os.environ.get("MONGO_PORT")}/{os.environ.get("MONGO_DB")}'
+	print(app.config['MONGO_URI'])
 	mongo = PyMongo(app)
 	app.mongo = mongo
 

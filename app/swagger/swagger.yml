@@ -1,0 +1,75 @@
+swagger: "2.0"
+info:
+  title: "Module task API"
+  description: "API documentation for the module task."
+  version: "1.0"
+
+paths:
+  /api/advice:
+    post:
+      summary: "Create a new advice"
+      tags: 
+        - "Advice"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: body
+          name: advice  # Update this line
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: "The title of the advice."
+                example: "Your Title"
+              description:
+                type: string
+                description: "The description of the advice."
+                example: "Your Description"
+              author:
+                type: string
+                description: "The author of the advice."
+                example: "Your Author"
+      required: true
+      responses:
+        201:
+          description: "Advice created successfully."
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the created advice."
+              title:
+                type: string
+                description: "The title of created advice"
+              description:
+                type: string
+                description: "The description of created advice"
+              author:
+                type: string
+                description: "The author of created advice"
+    get:
+      summary: "Get all advices"
+      tags: 
+        - "Advice"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      responses:
+        200:
+          description: "All advices returned successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the created advice."
+              title:
+                type: string
+                description: "The title of created advice"
+              description:
+                type: string
+                description: "The description of created advice"
+              author:
+                type: string
+                description: "The author of created advice"

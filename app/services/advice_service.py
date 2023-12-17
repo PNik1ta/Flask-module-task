@@ -1,12 +1,12 @@
-from repositories import advice_repository as AdviceRepository
-from classes import Advice
+from app.repositories.advice_repository import AdviceRepository
+from app.classes.advice import Advice
 
 class AdviceService: 
 	def __init__(self, adviceRepository: AdviceRepository):
 		self.adviceRepository= adviceRepository
 
-	def createAdvice(self, title: str, description: str, author: str, _id=None):
-		advice = Advice(title, description, author. _id)
+	def createAdvice(self, title: str, description: str, author: str):
+		advice = Advice(title, description, author)
 		self.adviceRepository.createAdvice(advice)
 		return advice
 	
@@ -24,10 +24,10 @@ class AdviceService:
 	def getAllAdvices(self): 
 		adviceList = self.adviceRepository.getAllAdvices()
 		return [{
-			'_id': advice._id,
-			'title': advice.title,
-			'description': advice.description,
-			'author': advice.author,
+			'_id': str(advice['_id']),
+			'title': advice['title'],
+			'description': advice['description'],
+			'author': advice['author'],
 		} for advice in adviceList] 
 	
 	def updateAdvice(self, adviceId: str, title: str, description: str, author: str):
