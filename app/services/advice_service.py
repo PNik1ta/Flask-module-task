@@ -3,7 +3,7 @@ from app.classes.advice import Advice
 
 class AdviceService: 
 	def __init__(self, adviceRepository: AdviceRepository):
-		self.adviceRepository= adviceRepository
+		self.adviceRepository = adviceRepository
 
 	def createAdvice(self, title: str, description: str, author: str):
 		advice = Advice(title, description, author)
@@ -14,7 +14,7 @@ class AdviceService:
 		advice = self.adviceRepository.getAdviceById(adviceId)
 		if advice:
 			return [{
-				'_id': advice._id,
+				'_id': str(advice['_id']),
 				'title': advice.title,
 				'description': advice.description,
 				'author': advice.author,
@@ -34,13 +34,13 @@ class AdviceService:
 		updatedAdvice: Advice(title, description, author, adviceId)
 		result = self.adviceRepository.updateAdvice(adviceId, updatedAdvice)
 		if result.matched_count > 0:
-			return {'message': 'Result updated successfully'}
+			return {'message': 'Advice updated successfully'}
 		return {'error': 'Advice not found'}, 404
 	
 	def deleteAdvice(self, adviceId: str):
 		result = self.adviceRepository.deleteAdvice(adviceId)
 		if result.deleted_count > 0:
-			return {'message': 'Result deleted successfully'}
+			return {'message': 'Advice deleted successfully'}
 		return {'error': 'Advice not found'}, 404
 
 
