@@ -5,8 +5,8 @@ class ChallengeService:
 	def __init__(self, challengeRepository: ChallengeRepository):
 		self.challengeRepository = challengeRepository
 
-	def createChallenge(self, title: str, description: str, level: int, exp: int):
-		challenge = Challenge(title, description, level, exp)
+	def createChallenge(self, title: str, description: str, category: str, exp: int):
+		challenge = Challenge(title, description, category, exp)
 		self.challengeRepository.createChallenge(challenge)
 		return challenge
 	
@@ -17,7 +17,7 @@ class ChallengeService:
 				'_id': str(challenge['_id']),
 				'title': challenge.title,
 				'description': challenge.description,
-				'level': challenge.level,
+				'category': challenge.category,
 				'exp': challenge.exp
 			}] 
 		return {'error': 'Challenge not found'}, 404
@@ -28,12 +28,12 @@ class ChallengeService:
 			'_id': str(challenge['_id']),
 			'title': challenge.title,
 			'description': challenge.description,
-			'level': challenge.level,
+			'category': challenge.category,
 			'exp': challenge.exp
 		} for challenge in challengeList] 
 	
-	def updateChallenge(self, challengeId: str, title: str, description: str, level: int, exp: int):
-		updatedChallenge: Challenge(title, description, level, exp, challengeId)
+	def updateChallenge(self, challengeId: str, title: str, description: str, category: str, exp: int):
+		updatedChallenge: Challenge(title, description, category, exp, challengeId)
 		result = self.challengeRepository.updateChallenge(challengeId, updatedChallenge)
 		if result.matched_count > 0:
 			return {'message': 'Challenge updated successfully'}

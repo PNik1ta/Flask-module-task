@@ -5,8 +5,8 @@ class IcebreakerService:
 	def __init__(self, icebreakerRepository: IcebreakerRepository):
 		self.icebreakerRepository = icebreakerRepository
 
-	def createIcebreaker(self, title: str, description: str, category: str):
-		icebreaker = Icebreaker(title, description, category)
+	def createIcebreaker(self, content: str, category: str):
+		icebreaker = Icebreaker(content, category)
 		self.icebreakerRepository.createIcebreaker(icebreaker)
 		return icebreaker
 	
@@ -15,8 +15,7 @@ class IcebreakerService:
 		if icebreaker:
 			return [{
 				'_id': str(icebreaker['_id']),
-				'title': icebreaker.title,
-				'description': icebreaker.description,
+				'content': icebreaker.content,
 				'category': icebreaker.category,
 			}] 
 		return {'error': 'Icebreaker not found'}, 404
@@ -25,13 +24,12 @@ class IcebreakerService:
 		icebreakerList = self.icebreakerRepository.getAllIcebreakers()
 		return [{
 			'_id': str(icebreaker['_id']),
-			'title': icebreaker.title,
-			'description': icebreaker.description,
+			'content': icebreaker.content,
 			'category': icebreaker.category,
 		} for icebreaker in icebreakerList] 
 	
-	def updateIcebreaker(self, icebreakerId: str, title: str, description: str, category: str):
-		updatedIcebreaker: Icebreaker(title, description, category, icebreakerId)
+	def updateIcebreaker(self, icebreakerId: str, content: str, category: str):
+		updatedIcebreaker: Icebreaker(content, category, icebreakerId)
 		result = self.icebreakerRepository.updateIcebreaker(icebreakerId, updatedIcebreaker)
 		if result.matched_count > 0:
 			return {'message': 'Icebreaker updated successfully'}

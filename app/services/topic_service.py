@@ -1,7 +1,7 @@
-from app.repositories.theme_repository import ThemeRepisitory
-from app.classes.theme import Theme
+from app.repositories.topic_repository import ThemeRepisitory
+from app.classes.topic import Theme
 
-class ThemeService: 
+class TopicService: 
 	def __init__(self, themeRepository: ThemeRepisitory):
 		self.themeRepository = themeRepository
 

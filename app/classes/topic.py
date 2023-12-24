@@ -1,4 +1,4 @@
-class Theme: 
+class Topic: 
 	def __init__(self, title: str, description: str, _id: str = None):
 		self.title = title
 		self.description = description

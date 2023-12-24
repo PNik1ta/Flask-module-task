@@ -1,8 +1,8 @@
-from app.classes.theme import Theme
+from app.classes.topic import Theme
 from flask import current_app
 from bson.objectid import ObjectId
 
-class ThemeRepisitory:
+class TopicRepository:
 	def __init__(self, app):
 		self.app = app
 		

@@ -6,14 +6,14 @@ import os
 from app.repositories.advice_repository import AdviceRepository
 from app.repositories.challenge_repository import ChallengeRepository
 from app.repositories.icebracker_repository import IcebreakerRepository
-from app.repositories.theme_repository import ThemeRepisitory
+from app.repositories.topic_repository import TopicRepository
 from app.repositories.user_repository import UserRepository
 
 #services
 from app.services.advice_service import AdviceService
 from app.services.challenge_service import ChallengeService
 from app.services.icebreaker_service import IcebreakerService
-from app.services.theme_service import ThemeService
+from app.services.topic_service import TopicService
 from app.services.user_service import UserService
 
 from flasgger import Swagger
@@ -31,19 +31,19 @@ def create_app():
 	adviceRepository = AdviceRepository(app)
 	challengeRepository = ChallengeRepository(app)
 	icebreakerRepository = IcebreakerRepository(app)
-	themeRepository = ThemeRepisitory(app)
+	topicRepository = TopicService(app)
 	userRepository = UserRepository(app)
 
 	#services
 	adviceService = AdviceService(adviceRepository)
 	challengeService = ChallengeService(challengeRepository)
 	icebreakerService = IcebreakerService(icebreakerRepository)
-	themeService = ThemeService(themeRepository)
+	topicService = TopicService(topicRepository)
 	userService = UserService(userRepository, challengeRepository)
 
 	app.adviceService = adviceService
 	app.challengeService = challengeService
 	app.icebreakerService = icebreakerService
-	app.themeService = themeService
+	app.themeService = topicService
 	app.userService = userService
 	return app

@@ -7,8 +7,8 @@ class UserService:
 		self.userRepository = userRepository
 		self.challengeRepository = challengeRepository
 
-	def createTheme(self, fullname: str, email: str, password: str, username: str, age: int, avatarImg: str, exp: int, level: int, challengesCompleted: int):
-		user = User(fullname, email, password, username, age, avatarImg, exp, level, challengesCompleted)
+	def createTheme(self, fullname: str, email: str, password: str, role: str, username: str, age: int, avatarImg: str, exp: int, level: int, challengesCompleted: int):
+		user = User(fullname, email, password, role, username, age, avatarImg, exp, level, challengesCompleted)
 		self.userRepository.createUser(user)
 		return user
 	
@@ -19,6 +19,7 @@ class UserService:
 				'_id': str(user['_id']),
 				'fullname': user.fullname,
 				'email': user.email,
+				'role': user.role,
 				'username': user.username,
 				'age': user.age,
 				'avatarImg': user.avatarImg,
@@ -34,6 +35,7 @@ class UserService:
 			'_id': str(user['_id']),
 			'fullname': user.fullname,
 			'email': user.email,
+			'role': user.role,
 			'username': user.username,
 			'age': user.age,
 			'avatarImg': user.avatarImg,
@@ -42,8 +44,8 @@ class UserService:
 			'challengesCompleted': user.challengesCompleted
 		} for user in userList] 
 	
-	def updateUser(self, userId: str, fullname: str, email: str, password: str, username: str, age: int, avatarImg: str, exp: int, level: int, challengesCompleted: int):
-		updatedUser: User(fullname, email, password, username, age, avatarImg, exp, level, challengesCompleted, userId)
+	def updateUser(self, userId: str, fullname: str, email: str, password: str, role: str, username: str, age: int, avatarImg: str, exp: int, level: int, challengesCompleted: int):
+		updatedUser: User(fullname, email, password, role, username, age, avatarImg, exp, level, challengesCompleted, userId)
 		result = self.userRepository.updateUser(userId, updatedUser)
 		if result.matched_count > 0:
 			return {'message': 'User updated successfully'}
