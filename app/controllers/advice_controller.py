@@ -19,6 +19,7 @@ def createAdvice():
 		'author': myAdvice.author}), 201
 
 @advice_bp.route('/advice/<adviceId>', methods=['GET'])
+@swag_from('../swagger/swagger.yml')
 def getAdviceById(adviceId: str):
 	advice = app.adviceService.getAdviceById(adviceId)
 	if advice:
@@ -32,12 +33,14 @@ def getAllAdvices():
 	return jsonify(advices), 200
 
 @advice_bp.route('/advice/<adviceId>', methods=['PUT'])
+@swag_from('../swagger/swagger.yml')
 def updateAdvice(adviceId: str):
 	data = request.json
 	updatedAdvice = app.adviceService.updateAdvice(adviceId, data['title'], data['description'], data['author'])
 	return jsonify(updatedAdvice), 200
 
 @advice_bp.route('/advice/<adviceId>', methods=['DELETE'])
+@swag_from('../swagger/swagger.yml')
 def deleteAdvice(adviceId: str):
 	result = app.adviceService.deleteAdvice(adviceId)
 	return jsonify(result)

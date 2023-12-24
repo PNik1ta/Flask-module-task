@@ -12,12 +12,13 @@ class AdviceService:
 	
 	def getAdviceById(self, adviceId: str): 
 		advice = self.adviceRepository.getAdviceById(adviceId)
+		print(advice)
 		if advice:
 			return [{
 				'_id': str(advice['_id']),
-				'title': advice.title,
-				'description': advice.description,
-				'author': advice.author,
+				'title': advice['title'],
+				'description': advice['description'],
+				'author': advice['author'],
 			}] 
 		return {'error': 'Advice not found'}, 404
 	
@@ -31,7 +32,8 @@ class AdviceService:
 		} for advice in adviceList] 
 	
 	def updateAdvice(self, adviceId: str, title: str, description: str, author: str):
-		updatedAdvice: Advice(title, description, author, adviceId)
+		updatedAdvice = Advice(title, description, author, adviceId)
+		print(updatedAdvice)
 		result = self.adviceRepository.updateAdvice(adviceId, updatedAdvice)
 		if result.matched_count > 0:
 			return {'message': 'Advice updated successfully'}

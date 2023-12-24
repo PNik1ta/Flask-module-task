@@ -14,7 +14,7 @@ paths:
         - "application/json"
       parameters:
         - in: body
-          name: advice  # Update this line
+          name: advice 
           schema:
             type: object
             properties:
@@ -54,7 +54,7 @@ paths:
       tags: 
         - "Advice"
       consumes:
-        - "application/x-www-form-urlencoded"
+        - "application/json"
       responses:
         200:
           description: "All advices returned successfully"
@@ -73,3 +73,940 @@ paths:
               author:
                 type: string
                 description: "The author of created advice"
+  /api/advice/{adviceId}:
+    get:
+      summary: "Get advice by adviceId"
+      tags: 
+        - "Advice"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: adviceId
+          schema:
+            type: string
+          required: true
+          description: String ID of the advice to get
+      responses:
+        200:
+          description: "Advice returned successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the created advice."
+              title:
+                type: string
+                description: "The title of created advice"
+              description:
+                type: string
+                description: "The description of created advice"
+              author:
+                type: string
+                description: "The author of created advice"
+    delete:
+      summary: "Delete advice by adviceId"
+      tags: 
+        - "Advice"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: adviceId
+          schema:
+            type: string
+          required: true
+          description: String ID of the advice to delete
+      responses:
+        200:
+          description: "Advice deleted successfully"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: "Delete success message"
+    put: 
+      summary: "Change advice by adviceId"
+      tags: 
+        - "Advice"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: adviceId
+          schema:
+            type: string
+          required: true
+          description: String ID of the advice to change
+        - in: body
+          name: advice
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: "The title of the advice."
+                example: "Your Title"
+              description:
+                type: string
+                description: "The description of the advice."
+                example: "Your Description"
+              author:
+                type: string
+                description: "The author of the advice."
+                example: "Your Author"
+      responses:
+        200:
+          description: "Advice changed successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the changed advice."
+              title:
+                type: string
+                description: "The title of created advice"
+              description:
+                type: string
+                description: "The description of created advice"
+              author:
+                type: string
+                description: "The author of created advice"
+  /api/challenge:
+    post:
+      summary: "Create a new challenge"
+      tags: 
+        - "Challenge"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: body
+          name: challenge 
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: "The title of the challenge."
+                example: "Your Title"
+              description:
+                type: string
+                description: "The description of the challenge."
+                example: "Your Description"
+              category:
+                type: string
+                description: "The category of the challenge."
+                example: "Your category"
+              exp:
+                type: integer
+                description: "The exp of the challenge."
+                example: 0
+      required: true
+      responses:
+        201:
+          description: "Challenge created successfully."
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the created challenge."
+              title:
+                type: string
+                description: "The title of the challenge."
+              description:
+                type: string
+                description: "The description of the challenge."
+              category:
+                type: string
+                description: "The category of the challenge."
+              exp:
+                type: integer
+                description: "The exp of the challenge."
+    get:
+      summary: "Get all challenges"
+      tags: 
+        - "Challenge"
+      consumes:
+        - "application/json"
+      responses:
+        200:
+          description: "All challenges returned successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the created challenge."
+              title:
+                type: string
+                description: "The title of the challenge."
+              description:
+                type: string
+                description: "The description of the challenge."
+              category:
+                type: string
+                description: "The category of the challenge."
+              exp:
+                type: int
+                description: "The exp of the challenge."
+  /api/challenge/{challengeId}:
+    get:
+      summary: "Get challenge by challengeId"
+      tags: 
+        - "Challenge"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: challengeId
+          schema:
+            type: string
+          required: true
+          description: String ID of the challenge to get
+      responses:
+        200:
+          description: "Challenge returned successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the created challenge."
+              title:
+                type: string
+                description: "The title of the challenge."
+              description:
+                type: string
+                description: "The description of the challenge."
+              category:
+                type: string
+                description: "The category of the challenge."
+              exp:
+                type: integer
+                description: "The exp of the challenge."
+    delete:
+      summary: "Delete challenge by challengeId"
+      tags: 
+        - "Challenge"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: challengeId
+          schema:
+            type: string
+          required: true
+          description: String ID of the challenge to delete
+      responses:
+        200:
+          description: "Challenge deleted successfully"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: "Delete success message"
+    put: 
+      summary: "Change challenge by challengeId"
+      tags: 
+        - "Challenge"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: challengeId
+          schema:
+            type: string
+          required: true
+          description: String ID of the challenge to change
+        - in: body
+          name: challenge
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: "The title of the challenge."
+                example: "Your Title"
+              description:
+                type: string
+                description: "The description of the challenge."
+                example: "Your Description"
+              category:
+                type: string
+                description: "The category of the challenge."
+                example: "Your category"
+              exp:
+                type: integer
+                description: "The exp of the challenge."
+                example: 0
+      responses:
+        200:
+          description: "Challenge changed successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the changed challenge."
+              title:
+                type: string
+                description: "The title of the challenge."
+              description:
+                type: string
+                description: "The description of the challenge."
+              category:
+                type: string
+                description: "The category of the challenge."
+              exp:
+                type: integer
+                description: "The exp of the challenge."
+  /api/icebreaker:
+    post:
+      summary: "Create a new icebreaker"
+      tags: 
+        - "Icebreaker"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: body
+          name: icebreaker 
+          schema:
+            type: object
+            properties:
+              content:
+                type: string
+                description: "The content of the icebreaker."
+                example: "Your content"
+              category:
+                type: string
+                description: "The category of the icebreaker."
+                example: "Your category"
+      required: true
+      responses:
+        201:
+          description: "Icebreaker created successfully."
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the created icebreaker."
+              content:
+                type: string
+                description: "The content of the challenge."
+              category:
+                type: string
+                description: "The category of the icebreaker."
+    get:
+      summary: "Get all icebreakers"
+      tags: 
+        - "Icebreaker"
+      consumes:
+        - "application/json"
+      responses:
+        200:
+          description: "All icebreakers returned successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the icebreaker."
+              content:
+                type: string
+                description: "The content of the icebreaker."
+              category:
+                type: string
+                description: "The category of the icebreaker."
+  /api/icebreaker/{icebreakerId}:
+    get:
+      summary: "Get icebreaker by icebreakerId"
+      tags: 
+        - "Icebreaker"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: icebreakerId
+          schema:
+            type: string
+          required: true
+          description: String ID of the icebreaker to get
+      responses:
+        200:
+          description: "Icebreaker returned successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the icebreaker."
+              content:
+                type: string
+                description: "The content of the icebreaker."
+              category:
+                type: string
+                description: "The category of the icebreaker."
+    delete:
+      summary: "Delete icebreaker by icebreakerId"
+      tags: 
+        - "Icebreaker"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: icebreakerId
+          schema:
+            type: string
+          required: true
+          description: String ID of the icebreaker to delete
+      responses:
+        200:
+          description: "Icebreaker deleted successfully"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: "Delete success message"
+    put: 
+      summary: "Change icebreaker by icebreakerId"
+      tags: 
+        - "Icebreaker"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: icebreakerId
+          schema:
+            type: string
+          required: true
+          description: String ID of the icebraker to change
+        - in: body
+          name: icebreaker
+          schema:
+            type: object
+            properties:
+              content:
+                type: string
+                description: "The content of the icebreaker."
+                example: "Your content"
+              category:
+                type: string
+                description: "The category of the icebreaker."
+                example: "Your category"
+      responses:
+        200:
+          description: "Icebreaker changed successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the changed icebreaker."
+              content:
+                type: string
+                description: "The content of the icebreaker."
+              category:
+                type: string
+                description: "The category of the icebreaker."
+  /api/topic:
+    post:
+      summary: "Create a new topic"
+      tags: 
+        - "Topic"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: body
+          name: topic 
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: "The title of the topic."
+                example: "Your title"
+              description:
+                type: string
+                description: "The description of the topic."
+                example: "Your description"
+      required: true
+      responses:
+        201:
+          description: "Topic created successfully."
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the created topic."
+              title:
+                type: string
+                description: "The title of the topic."
+              description:
+                type: string
+                description: "The description of the topic."
+    get:
+      summary: "Get all topics"
+      tags: 
+        - "Topic"
+      consumes:
+        - "application/json"
+      responses:
+        200:
+          description: "All topics returned successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the topic."
+              title:
+                type: string
+                description: "The title of the topic."
+              description:
+                type: string
+                description: "The description of the topic."
+  /api/topic/{topicId}:
+    get:
+      summary: "Get topic by topicId"
+      tags: 
+        - "Topic"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: topicId
+          schema:
+            type: string
+          required: true
+          description: String ID of the topic to get
+      responses:
+        200:
+          description: "Topic returned successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the topic."
+              title:
+                type: string
+                description: "The title of the topic."
+              description:
+                type: string
+                description: "The description of the topic."
+    delete:
+      summary: "Delete topic by topicId"
+      tags: 
+        - "Topic"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: topicId
+          schema:
+            type: string
+          required: true
+          description: String ID of the topic to delete
+      responses:
+        200:
+          description: "Topic deleted successfully"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: "Delete success message"
+    put: 
+      summary: "Change topic by topicId"
+      tags: 
+        - "Topic"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: topicId
+          schema:
+            type: string
+          required: true
+          description: String ID of the topic to change
+        - in: body
+          name: topic
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: "The title of the topic."
+                example: "Your title"
+              description:
+                type: string
+                description: "The description of the topic."
+                example: "Your description"
+      responses:
+        200:
+          description: "Topic changed successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the changed topic"
+              title:
+                type: string
+                description: "The title of the topic."
+              description:
+                type: string
+                description: "The description of the topic."
+  /api/user:
+    post:
+      summary: "Create a new user"
+      tags: 
+        - "User"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: body
+          name: user 
+          schema:
+            type: object
+            properties:
+              fullName:
+                type: string
+                description: "The full name of the user."
+                example: "Your full name"
+              email:
+                type: string
+                description: "The email of the user."
+                example: "Your email"
+              password:
+                type: string
+                description: "The password of the user."
+                example: "Your password"
+              role:
+                type: string
+                description: "The role of the user."
+                example: "Your role"
+              username:
+                type: string
+                description: "The username of the user."
+                example: "Your username"
+              age:
+                type: integer
+                description: "The age of the user."
+                example: 18
+              avatarImg:
+                type: string
+                description: "The avatar image of the user."
+                example: "Your avatar image link"
+      required: true
+      responses:
+        201:
+          description: "User created successfully."
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the user."
+              fullName:
+                type: string
+                description: "The full name of the user."
+              email:
+                type: string
+                description: "The email of the user."
+              role:
+                type: string
+                description: "The role of the user."
+              username:
+                type: string
+                description: "The username of the user."
+              age:
+                type: integer
+                description: "The age of the user."
+              avatarImg:
+                type: string
+                description: "The avatar image of the user."
+              exp:
+                type: integer
+                description: "The experience of the user"
+              level:
+                type: integer
+                description: "The level of the user"
+              challengesCompleted:
+                type: integer
+                description: "The number of completed challenges by the user"
+    get:
+      summary: "Get all users"
+      tags: 
+        - "User"
+      consumes:
+        - "application/json"
+      responses:
+        200:
+          description: "All users returned successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the user."
+              fullName:
+                type: string
+                description: "The full name of the user."
+              email:
+                type: string
+                description: "The email of the user."
+              role:
+                type: string
+                description: "The role of the user."
+              username:
+                type: string
+                description: "The username of the user."
+              age:
+                type: integer
+                description: "The age of the user."
+              avatarImg:
+                type: string
+                description: "The avatar image of the user."
+              exp:
+                type: integer
+                description: "The experience of the user"
+              level:
+                type: integer
+                description: "The level of the user"
+              challengesCompleted:
+                type: integer
+                description: "The number of completed challenges by the user"
+  /api/user/{userId}:
+    get:
+      summary: "Get user by userId"
+      tags: 
+        - "User"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: String ID of the user to get
+      responses:
+        200:
+          description: "User returned successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the user."
+              fullName:
+                type: string
+                description: "The full name of the user."
+              email:
+                type: string
+                description: "The email of the user."
+              role:
+                type: string
+                description: "The role of the user."
+              username:
+                type: string
+                description: "The username of the user."
+              age:
+                type: integer
+                description: "The age of the user."
+              avatarImg:
+                type: string
+                description: "The avatar image of the user."
+              exp:
+                type: integer
+                description: "The experience of the user"
+              level:
+                type: integer
+                description: "The level of the user"
+              challengesCompleted:
+                type: integer
+                description: "The number of completed challenges by the user"
+    delete:
+      summary: "Delete user by userId"
+      tags: 
+        - "User"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: String ID of the user to delete
+      responses:
+        200:
+          description: "User deleted successfully"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: "Delete success message"
+    put: 
+      summary: "Change user by userId"
+      tags: 
+        - "User"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: String ID of the user to change
+        - in: body
+          name: user
+          schema:
+            type: object
+            properties:
+              fullName:
+                type: string
+                description: "The full name of the user."
+                example: "Your full name"
+              email:
+                type: string
+                description: "The email of the user."
+                example: "Your email"
+              password:
+                type: string
+                description: "The password of the user."
+                example: "Your password"
+              role:
+                type: string
+                description: "The role of the user."
+                example: "Your role"
+              username:
+                type: string
+                description: "The username of the user."
+                example: "Your username"
+              age:
+                type: integer
+                description: "The age of the user."
+                example: 18
+              avatarImg:
+                type: string
+                description: "The avatar image of the user."
+                example: "Your avatar image link"
+              exp:
+                type: integer
+                description: "The experience of the user."
+                example: 0
+              level:
+                type: integer
+                description: "The level of the user."
+                example: 0
+              challengesCompleted:
+                type: string
+                description: "The number of completed challenges by the user."
+                example: 0
+      responses:
+        200:
+          description: "User changed successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the user."
+              fullName:
+                type: string
+                description: "The full name of the user."
+              email:
+                type: string
+                description: "The email of the user."
+              role:
+                type: string
+                description: "The role of the user."
+              username:
+                type: string
+                description: "The username of the user."
+              age:
+                type: integer
+                description: "The age of the user."
+              avatarImg:
+                type: string
+                description: "The avatar image of the user."
+              exp:
+                type: integer
+                description: "The experience of the user"
+              level:
+                type: integer
+                description: "The level of the user"
+              challengesCompleted:
+                type: integer
+                description: "The number of completed challenges by the user"
+  /api/user/completeChallenge/{userId}:
+    put: 
+      summary: "User complete challenge and calling this route"
+      tags: 
+        - "User"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: String ID of the user to change
+        - in: body
+          name: user
+          schema:
+            type: object
+            properties:
+              challengeId:
+                type: string
+                description: "String ID of the completed challenge by user"
+                example: "Completed challenge id"
+      responses:
+        200:
+          description: "User changed successfully"
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                description: "The ID of the user."
+              fullName:
+                type: string
+                description: "The full name of the user."
+              email:
+                type: string
+                description: "The email of the user."
+              role:
+                type: string
+                description: "The role of the user."
+              username:
+                type: string
+                description: "The username of the user."
+              age:
+                type: integer
+                description: "The age of the user."
+              avatarImg:
+                type: string
+                description: "The avatar image of the user."
+              exp:
+                type: integer
+                description: "The experience of the user"
+              level:
+                type: integer
+                description: "The level of the user"
+              challengesCompleted:
+                type: integer
+                description: "The number of completed challenges by the user"

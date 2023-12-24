@@ -31,7 +31,7 @@ def create_app():
 	adviceRepository = AdviceRepository(app)
 	challengeRepository = ChallengeRepository(app)
 	icebreakerRepository = IcebreakerRepository(app)
-	topicRepository = TopicService(app)
+	topicRepository = TopicRepository(app)
 	userRepository = UserRepository(app)
 
 	#services
@@ -44,6 +44,6 @@ def create_app():
 	app.adviceService = adviceService
 	app.challengeService = challengeService
 	app.icebreakerService = icebreakerService
-	app.themeService = topicService
+	app.topicService = topicService
 	app.userService = userService
 	return app

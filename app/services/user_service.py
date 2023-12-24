@@ -7,8 +7,8 @@ class UserService:
 		self.userRepository = userRepository
 		self.challengeRepository = challengeRepository
 
-	def createTheme(self, fullname: str, email: str, password: str, role: str, username: str, age: int, avatarImg: str, exp: int, level: int, challengesCompleted: int):
-		user = User(fullname, email, password, role, username, age, avatarImg, exp, level, challengesCompleted)
+	def createUser(self, fullname: str, email: str, password: str, role: str, username: str, age: int, avatarImg: str):
+		user = User(fullname, email, password, role, username, age, avatarImg, 0, 1, 0)
 		self.userRepository.createUser(user)
 		return user
 	
@@ -17,15 +17,15 @@ class UserService:
 		if user:
 			return [{
 				'_id': str(user['_id']),
-				'fullname': user.fullname,
-				'email': user.email,
-				'role': user.role,
-				'username': user.username,
-				'age': user.age,
-				'avatarImg': user.avatarImg,
-				'exp': user.exp,
-				'level': user.level,
-				'challengesCompleted': user.challengesCompleted
+				'fullName': user['fullName'],
+				'email': user['email'],
+				'role': user['role'],
+				'username': user['username'],
+				'age': user['age'],
+				'avatarImg': user['avatarImg'],
+				'exp': user['exp'],
+				'level': user['level'],
+				'challengesCompleted': user['challengesCompleted']
 			}] 
 		return {'error': 'User not found'}, 404
 	
@@ -33,26 +33,26 @@ class UserService:
 		userList = self.userRepository.getAllUsers()
 		return [{
 			'_id': str(user['_id']),
-			'fullname': user.fullname,
-			'email': user.email,
-			'role': user.role,
-			'username': user.username,
-			'age': user.age,
-			'avatarImg': user.avatarImg,
-			'exp': user.exp,
-			'level': user.level,
-			'challengesCompleted': user.challengesCompleted
+			'fullName': user['fullName'],
+			'email': user['email'],
+			'role': user['role'],
+			'username': user['username'],
+			'age': user['age'],
+			'avatarImg': user['avatarImg'],
+			'exp': user['exp'],
+			'level': user['level'],
+			'challengesCompleted': user['challengesCompleted']
 		} for user in userList] 
 	
 	def updateUser(self, userId: str, fullname: str, email: str, password: str, role: str, username: str, age: int, avatarImg: str, exp: int, level: int, challengesCompleted: int):
-		updatedUser: User(fullname, email, password, role, username, age, avatarImg, exp, level, challengesCompleted, userId)
+		updatedUser = User(fullname, email, password, role, username, age, avatarImg, exp, level, challengesCompleted, userId)
 		result = self.userRepository.updateUser(userId, updatedUser)
 		if result.matched_count > 0:
 			return {'message': 'User updated successfully'}
 		return {'error': 'User not found'}, 404
 	
 	def deleteUser(self, userId: str):
-		result = self.userRepository.deleteTheme(userId)
+		result = self.userRepository.deleteUser(userId)
 		if result.deleted_count > 0:
 			return {'message': 'User deleted successfully'}
 		return {'error': 'User not found'}, 404
@@ -66,7 +66,8 @@ class UserService:
 		if (user.exp > 200):
 			user.level += 1
 			user.exp -= 200
-		self.updateUser(userId, user.fullname, user.email, user.password, user.username, user.age, user.avatarImg, user.exp, user.level, user.challengesCompleted)
+		self.updateUser(userId, user['fullName'], user['email'], user['password'], user['username'], 
+						user['age'], user['avatarImg'], user['exp'], user['level'], user['challengesCompleted'])
 
 
 

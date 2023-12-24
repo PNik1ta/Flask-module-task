@@ -1,44 +1,44 @@
-from app.repositories.topic_repository import ThemeRepisitory
-from app.classes.topic import Theme
+from app.repositories.topic_repository import TopicRepository
+from app.classes.topic import Topic
 
 class TopicService: 
-	def __init__(self, themeRepository: ThemeRepisitory):
-		self.themeRepository = themeRepository
+	def __init__(self, topicRepository: TopicRepository):
+		self.topicRepository = topicRepository
 
-	def createTheme(self, title: str, description: str):
-		theme = Theme(title, description)
-		self.themeRepository.createTheme(theme)
-		return theme
+	def createTopic(self, title: str, description: str):
+		topic = Topic(title, description)
+		self.topicRepository.createTopic(topic)
+		return topic
 	
-	def getThemeById(self, themeId: str): 
-		theme = self.themeRepository.getThemeById(themeId)
-		if theme:
+	def getTopicById(self, topicId: str): 
+		topic = self.topicRepository.getTopicById(topicId)
+		if topic:
 			return [{
-				'_id': str(theme['_id']),
-				'title': theme.title,
-				'description': theme.description,
+				'_id': str(topic['_id']),
+				'title': topic['title'],
+				'description': topic['description'],
 			}] 
-		return {'error': 'Theme not found'}, 404
+		return {'error': 'Topic not found'}, 404
 	
-	def getAllthemes(self): 
-		themeList = self.themeRepository.getAllThemes()
+	def getAllTopics(self): 
+		topicList = self.topicRepository.getAllTopics()
 		return [{
-			'_id': str(theme['_id']),
-			'title': theme['title'],
-			'description': theme['description'],
-		} for theme in themeList] 
+			'_id': str(topic['_id']),
+			'title': topic['title'],
+			'description': topic['description'],
+		} for topic in topicList] 
 	
-	def updateTheme(self, themeId: str, title: str, description: str):
-		updatedTheme: Theme(title, description, themeId)
-		result = self.themeRepository.updateTheme(themeId, updatedTheme)
+	def updateTopic(self, topicId: str, title: str, description: str):
+		updatedTopic = Topic(title, description, topicId)
+		result = self.topicRepository.updateTopic(topicId, updatedTopic)
 		if result.matched_count > 0:
-			return {'message': 'Theme updated successfully'}
-		return {'error': 'Theme not found'}, 404
+			return {'message': 'Topic updated successfully'}
+		return {'error': 'Topic not found'}, 404
 	
-	def deleteTheme(self, themeId: str):
-		result = self.themeRepository.deleteTheme(themeId)
+	def deleteTopic(self, topicId: str):
+		result = self.topicRepository.deleteTopic(topicId)
 		if result.deleted_count > 0:
-			return {'message': 'Theme deleted successfully'}
-		return {'error': 'Theme not found'}, 404
+			return {'message': 'Topic deleted successfully'}
+		return {'error': 'Topic not found'}, 404
 
 

@@ -15,10 +15,10 @@ class ChallengeService:
 		if challenge:
 			return [{
 				'_id': str(challenge['_id']),
-				'title': challenge.title,
-				'description': challenge.description,
-				'category': challenge.category,
-				'exp': challenge.exp
+				'title': challenge['title'],
+				'description': challenge['description'],
+				'category': challenge['category'],
+				'exp': challenge['exp']
 			}] 
 		return {'error': 'Challenge not found'}, 404
 	
@@ -26,14 +26,14 @@ class ChallengeService:
 		challengeList = self.challengeRepository.getAllChallenges()
 		return [{
 			'_id': str(challenge['_id']),
-			'title': challenge.title,
-			'description': challenge.description,
-			'category': challenge.category,
-			'exp': challenge.exp
+			'title': challenge['title'],
+			'description': challenge['description'],
+			'category': challenge['category'],
+			'exp': challenge['exp']
 		} for challenge in challengeList] 
 	
 	def updateChallenge(self, challengeId: str, title: str, description: str, category: str, exp: int):
-		updatedChallenge: Challenge(title, description, category, exp, challengeId)
+		updatedChallenge = Challenge(title, description, category, exp, challengeId)
 		result = self.challengeRepository.updateChallenge(challengeId, updatedChallenge)
 		if result.matched_count > 0:
 			return {'message': 'Challenge updated successfully'}
