@@ -1,2 +1,4 @@
-# env files
-.env
+# mongo-data files
+/mongo-data
+./mongo-data
+mongo-data
