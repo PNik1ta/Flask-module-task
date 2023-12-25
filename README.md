@@ -1,7 +1,5 @@
 # Flask-module-task
 
-Нужен .env файл.
-
 ## Installation
 
 **Install Docker by following these steps**:
