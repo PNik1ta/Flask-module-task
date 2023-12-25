@@ -44,3 +44,15 @@ def updateAdvice(adviceId: str):
 def deleteAdvice(adviceId: str):
 	result = app.adviceService.deleteAdvice(adviceId)
 	return jsonify(result)
+
+@advice_bp.route('/advice/recommend-advice', methods=['GET'])
+@swag_from('../swagger/swagger.yml')
+def recommendAdvice():
+	result = app.adviceService.recommendAdvice()
+	return jsonify(result)
+
+@advice_bp.route('/advice/random-advice', methods=['GET'])
+@swag_from('../swagger/swagger.yml')
+def getRandomAdvice():
+	result = app.adviceService.getRandomAdvice()
+	return jsonify(result)

@@ -73,6 +73,34 @@ paths:
               author:
                 type: string
                 description: "The author of created advice"
+  /api/advice/recommend-advice: 
+    get:
+      summary: "Get recommended advice"
+      tags: 
+        - "Advice"
+      consumes:
+        - "application/json"
+      responses:
+        200:
+          description: "Coming soon"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: "This method will be coming soon"
+  /api/advice/random-advice: 
+     get:
+      summary: "Get random advice"
+      tags: 
+        - "Advice"
+      consumes:
+        - "application/json"
+      responses:
+        200:
+          description: "Random advice"
+          schema:
+            type: object
   /api/advice/{adviceId}:
     get:
       summary: "Get advice by adviceId"

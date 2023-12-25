@@ -1,5 +1,6 @@
 from app.repositories.advice_repository import AdviceRepository
 from app.classes.advice import Advice
+import requests
 
 class AdviceService: 
 	def __init__(self, adviceRepository: AdviceRepository):
@@ -39,10 +40,22 @@ class AdviceService:
 			return {'message': 'Advice updated successfully'}
 		return {'error': 'Advice not found'}, 404
 	
+	def getRandomAdvice(self):
+		url = 'https://api.adviceslip.com/advice'
+		response = requests.get(url)
+		if response.status_code == 200:
+			advice_data = response.json()
+			return advice_data['slip']['advice']
+		else:
+			return 'Failed to fetch advice'
+	
 	def deleteAdvice(self, adviceId: str):
 		result = self.adviceRepository.deleteAdvice(adviceId)
 		if result.deleted_count > 0:
 			return {'message': 'Advice deleted successfully'}
 		return {'error': 'Advice not found'}, 404
+	
+	def recommendAdvice(self):
+		return {'message': 'Coming soon'}
 
 
